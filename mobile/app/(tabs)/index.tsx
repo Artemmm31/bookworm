@@ -1,4 +1,4 @@
-import { View, Text, FlatList, ActivityIndicator, RefreshControl } from 'react-native'
+import { View, Text, FlatList, ActivityIndicator, RefreshControl, TouchableOpacity } from 'react-native'
 import React, { useEffect, useState } from 'react'
 import { useAuthStore } from '@/store/authStore';
 import styles from '@/assets/styles/home.styles';

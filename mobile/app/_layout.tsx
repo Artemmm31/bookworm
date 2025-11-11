@@ -28,7 +28,7 @@ export default function RootLayout() {
     const isSignedIn = user && token;
     
     if(!inAuthScreen && !isSignedIn) router.replace('/(auth)');
-    else if(isSignedIn && inAuthScreen) router.replace('/(tabs)/index');
+    else if(isSignedIn && inAuthScreen) router.replace('/(tabs)');
   }, [user, token, segments, navigationState?.key, loading]); 
   return (
     <SafeAreaProvider>
