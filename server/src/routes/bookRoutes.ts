@@ -51,7 +51,18 @@ router.get('/', protectRoute, async (req, res) => {
         const err = error as Error;
         res.status(500).json({message: err.message})
     }
-})
+});
+
+router.get("/user", protectRoute, async (req, res) => {
+  try {
+    const books = await Book.find({ user: (req as any).user._id }).sort({ createdAt: -1 });
+    res.json(books);
+  } catch (error) {
+    const err = error as Error;
+    console.error("Get user books error:", err.message);
+    res.status(500).json({ message: "Server error" });
+  }
+});
 
 router.delete('/:id', protectRoute, async (req, res) => {
     try {

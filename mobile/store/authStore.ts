@@ -6,6 +6,7 @@ type AuthState = {
   user: any;               
   token: string | null;
   isLoading: boolean;
+  isCheckingAuth: boolean;
   register: (username: string, email: string, password: string) => Promise<{success: boolean, error?: string}>;
   checkAuth: () => Promise<void>;
   logout: () => Promise<void>;
@@ -16,6 +17,7 @@ export const useAuthStore = create<AuthState>((set) => ({
     user: null,
     token: null,
     isLoading: false,
+    isCheckingAuth: true,
 
     register: async (username, email, password) => {
         set({ isLoading: true });
@@ -61,6 +63,8 @@ export const useAuthStore = create<AuthState>((set) => ({
 
         } catch (error) {
             console.log("Error", error);    
+        } finally {
+            set({isCheckingAuth: false});
         }
     },
 

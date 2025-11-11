@@ -33,13 +33,14 @@ router.post('/register', async (req, res) => {
             username,
             password,
             profileImage,
+            createdAt: new Date(),
         })
 
         await user.save();
 
         const token = generateToken(user._id.toString());
 
-        res.status(201).json({token, user: {_id: user._id, username: user.username, email: user.email, profileImage: user.profileImage}})
+        res.status(201).json({token, user: {_id: user._id, username: user.username, email: user.email, profileImage: user.profileImage, createdAt: user.createdAt}})
     } catch (error) {
         console.log('server error:', error);
         res.status(500).json({ message: 'Internal server error'})
@@ -68,6 +69,7 @@ router.post('/login', async (req, res) => {
                 username: user.username,
                 email: user.email,
                 profileImage: user.profileImage,
+                createdAt: user.createdAt,
             }
         })
     } catch (error) {
